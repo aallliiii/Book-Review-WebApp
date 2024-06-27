@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs'); %>
+<div class="container">
+    <form action="/add" method="post">
+        <div class="mb-3 my-5">
+            <label for="exampleFormControlInput1" class="form-label">Book Name</label>
+            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter the name of the book">
+          </div>
+          <div class="mb-3 my-5">
+            <label for="exampleFormControlInput1" class="form-label">ISBN Number</label>
+            <input type="number" class="form-control" id="bookISBN" placeholder="Enter ISBN number of the book">
+          </div>
+          <div class="mb-3 my-5">
+            <label for="exampleFormControlInput1" class="form-label">Date Read</label>
+            <input type="date" class="form-control" id="dateRead" placeholder="Enter the date you read this book">
+          </div>
+          <div class="mb-3 my-5">
+            <label for="exampleFormControlInput1" class="form-label">Remarks</label>
+            <input type="text" class="form-control" id="bookRemarks" placeholder="Give some remarks about the book">
+          </div>
+          <div class="mb-3 my-5">
+            <label for="exampleFormControlTextarea1" class="form-label">Detailed Overview</label>
+            <textarea class="form-control" id="bookOverview" rows="3" placeholder="Write a detailed overview about the book"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<%- include('partials/footer.ejs'); %>
