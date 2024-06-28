@@ -1,16 +1,30 @@
     <%- include('partials/header.ejs'); %>
+    <div class="container text-center mt-5">
+      <h1 class="display-5 fw-bold mycolor">My Book Reviews</h1>
+  </div>
+  
     <% for (let i = 0; i < bookData.bookNames.length; i++) {%>
     <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-5">
+    
           <div class="col-10 col-sm-8 col-lg-6">
-            <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        
+            <img src="https://covers.openlibrary.org/b/isbn/<%=bookData.bookISBNs[i];%>-L.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
           </div>
           <div class="col-lg-6">
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><%= bookData.bookNames[i]; %></h1>
+            <h4><span class="badge text-bg-secondary">Date Read: <%= bookData.dateRead[i].toLocaleDateString('en-US'); %></span></h4>
+
             <p class="lead"><%= bookData.bookRemarks[i]; %></p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">View Notes</button>
-              
+              <form action="/view-notes" method="POST" class="me-md-2">
+                <input type="hidden" name="counter" value="<%= i %>">
+                <button type="submit" class="btn btn-primary btn-lg px-4">View Notes</button>
+            </form>
+            <form action="/delete-book" method="POST">
+                <input type="hidden" name="bookName" value="<%= bookData.bookNames[i] %>">
+                <button type="submit" class="btn btn-outline-danger btn-lg px-4">Delete</button>
+            </form>
             </div>
           </div>
         </div>

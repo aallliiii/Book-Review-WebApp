@@ -1,0 +1,14 @@
+<%- include('partials/header.ejs'); %>
+<hr class="featurette-divider">
+<div class="container my-5">
+    <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1"><%= bookData.bookNames[count]; %> <span class="text-body-secondary">by <%= bookData.authorNames[count]; %></span></h2>
+          <p class="lead mt-5"><%= bookData.bookOverview[count]; %>.</p>
+        </div>
+        <div class="col-md-5">
+            <img src="https://covers.openlibrary.org/b/isbn/<%=bookData.bookISBNs[count];%>-L.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+      </div>
+</div>
+<%- include('partials/footer.ejs') %>
