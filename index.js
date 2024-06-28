@@ -19,8 +19,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(port, () => {
   console.log("Running");
 });
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  const data = await getDataFromDatabase();
+  res.render("index", {
+    bookData: data,
+  });
 });
 
 app.post("/navigation", (req, res) => {
@@ -44,9 +47,36 @@ app.post("/add", async (req, res) => {
       [bookName, bookISBN, dateRead, bookRemarks, bookOverview]
     );
     console.log("Data inserted successfully");
+
     res.redirect("/");
   } catch (error) {
     console.log("Error inserting data!");
+
     res.redirect("/");
   }
 });
+
+async function getDataFromDatabase() {
+  const result = await db.query("Select * from bookReview");
+  let bookNames = [];
+  let bookISBNs = [];
+  let dateRead = [];
+  let bookRemarks = [];
+  let bookOverview = [];
+
+  result.rows.forEach((book) => {
+    bookNames.push(book.bookname),
+      bookISBNs.push(book.isbn),
+      dateRead.push(book.dateread),
+      bookRemarks.push(book.remarks),
+      bookOverview.push(book.overview);
+  });
+
+  return {
+    bookNames,
+    bookISBNs,
+    dateRead,
+    bookRemarks,
+    bookOverview,
+  };
+}
